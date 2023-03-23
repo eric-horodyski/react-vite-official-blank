@@ -1,8 +1,15 @@
-import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders without crashing', () => {
-  const { baseElement } = render(<App />);
-  expect(baseElement).toBeDefined();
+describe('<App>', () => {
+  it('renders without crashing', () => {
+    const { baseElement } = render(<App />);
+    screen.debug();
+    expect(baseElement).toBeDefined();
+  });
+
+  it('renders consistently', () => {
+    const { asFragment } = render(<App />);
+    expect(asFragment()).toMatchSnapshot();
+  });
 });
